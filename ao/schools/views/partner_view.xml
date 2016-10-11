@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<openerp>
+  <data noupdate="0">
+    <record model="ir.ui.view" id="ao_partner_view">
+      <field name="name">AO Partner View</field>
+      <field name="model">res.partner</field>
+      <field name="priority">76</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <data>
+          <xpath expr="//*[@name='function']" position="before">
+            <field name="roles"/>
+          </xpath>
+        </data>
+      </field>
+    </record>
+  </data>
+</openerp>

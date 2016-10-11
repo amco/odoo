@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<openerp>
+  <data noupdate="0">
+    <record model="ir.ui.view" id="view_openacademy_res_partner_form_inherit">
+      <field name="name">OpenAcademy Partner</field>
+      <field name="model">res.partner</field>
+      <field name="priority">66</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <data>
+          <xpath expr="//*[@name='opt_out']" position="after">
+            <field name="instructor"/>
+          </xpath>
+          <xpath expr="//notebook/page[@name='sales_purchases']" position="attributes">
+            <attribute name="string">Sales/Prospecting</attribute>
+          </xpath>
+        </data>
+      </field>
+    </record>
+  </data>
+</openerp>

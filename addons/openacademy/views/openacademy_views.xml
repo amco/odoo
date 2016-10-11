@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<openerp>
+  <data noupdate="0">
+    <!-- Open Academy Tree view -->
+    <record model="ir.ui.view" id="view_openacademy_sessions_tree">
+      <field name="name">Open Academy Tree View></field>
+      <field name="model">openacademy.session</field>
+      <field name="priority">16</field>
+      <field name="arch" type="xml">
+        <tree string="Sessions" editable="bottom" decoration-danger="max_seat&gt;200" decoration-info="max_seat==10">
+          <field name="state"/>
+          <field name="code"/>
+          <field name="name"/>
+          <field name="start_date"/>
+          <field name="end_date"/>
+          <field name="max_seat"/>
+          <field name="is_public"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_openacademy_sessions_search">
+      <field name="name">Open Academy Search View></field>
+      <field name="model">openacademy.session</field>
+      <field name="priority">16</field>
+      <field name="arch" type="xml">
+        <search string="Sessions">
+          <field name="name" string="Session Title"/>
+          <field name="code" string="Session Code"/>
+          <field name="course_id" string="Session Course"/>
+          <field name="instructor_id" string="Session Course"/>
+          <separator/>
+          <filter string="New Session" name="new_sessions" domain="[('state', '=', 'new')]"/>
+          <!-- <separator/> will create an and filter-->
+          <filter string="New Session" name="new_sessions" domain="[('state', '=', 'approve')]"/>
+        </search>
+      </field>
+    </record>
+
+    <!-- Open Academy Form view -->
+    <record model="ir.ui.view" id="view_openacademy_sessions_form">
+      <field name="name">Open Academy Form View></field>
+      <field name="model">openacademy.session</field>
+      <field name="arch" type="xml">
+        <form string="Session" class="form">
+          <header>
+            <button type="workflow" name="sig_approve_session" class="oe_highlight" string="Approve" states="new"/>
+            <button type="workflow" name="sig_reject_session" string="Reject" states="new"/>
+            <field name="state" widget="statusbar" statusbar_visible="new,approve,open,done"/>
+          </header>
+          <sheet>
+            <div class="form-group oe_title">
+              <label for="name"/>
+              <h1><field name="name" placeholder="Session Title"/></h1>
+            </div>
+
+            <div class="form-group">
+              <label for="code"/>
+              <field name="code" placeholder="Session Code"/>
+            </div>
+
+            <div class="form-group">
+              <label for="start_date"/>
+              <field name="start_date" required="1"/>
+            </div>
+
+            <div class="form-group">
+              <label for="duration_days"/>
+              <field name="duration_days" placeholder="Duration Days" attrs="{
+                'required':[('duration_days','=',0.0)],
+                'readonly':[('end_date','&gt;',0.0)]
+              }"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="end_date"/>
+              <field name="end_date" required="1"/>
+            </div>
+
+            <div class="form-group">
+              <button type="action" name="%(action_view_wizard_add_partner_form)d" string="Add Partner" class="oe_link" />
+            </div>
+
+            <notebook>
+              <page string="Instructor">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-control">
+                        <field name="course_id"/>
+                      </div>
+                      <div class="form-control">
+                        <field name="instructor_id" options="{'no_create': True, 'no_open': True}"/>
+                      </div>
+                      <div class="form-control">
+                        <field name="is_public"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <field name="total_invited"/>
+                      <field name="total_attending"/>
+                    </div>
+                  </div>
+                </div>
+              </page>
+
+              <page string="Attendees">
+                <field name="attendee_ids">
+                  <tree string="Attendee" editable="bottom">
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="count"/>
+                    <field name="state"/>
+                  </tree>
+                  <form string="Attendee">
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="count"/>
+                  </form>
+                </field>
+              </page>
+              <page string="Contain">
+                <field name="contain"/>
+              </page>
+
+              <page string="Banner">
+                <field name="banner"/>
+              </page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter mail_chatter">
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_views_openacademy_sessions">
+      <field name="name">Sessions</field>
+      <field name="res_model">openacademy.session</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="search_view_id" id="view_openacademy_sessions_search"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to create sessions
+        </p>
+        <p>
+          Here you can enter your course session
+          details with hosting details
+        </p>
+      </field>
+    </record>
+
+    <!-- Open Academy Course Tree view -->
+    <record model="ir.ui.view" id="view_openacademy_course_tree">
+      <field name="name">Open Academy Course</field>
+      <field name="model">openacademy.course</field>
+      <field name="arch" type="xml">
+        <tree string="Course" editable="bottom">
+          <field name="name"/>
+          <field name="responsible_id"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_openacademy_course_form">
+      <field name="name">Open Academy Course Form</field>
+      <field name="model">openacademy.course</field>
+      <field name="arch" type="xml">
+        <form string="Course" class="form">
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button class="oe_stat_button" type="object" name="open_sessions" icon="fa-calendar-o">
+                <div class="o_stat_info">
+                  <field name="session_count" widget="statinfo"/>
+                </div>
+              </button>
+            </div>
+            <field name="name"/>
+            <field name="active"/>
+            <field name="responsible_id"/>
+
+            <div class="form-group">
+              <label for="session_count"/>
+              <field name="session_count"/>
+              <button type="object" name="open_sessions" string="Open Sessions" icon="fa-cogs"/>
+            </div>
+
+            <notebook>
+              <page string="Notes">
+                <field name="notes"/>
+              </page>
+              <page string="Sessions">
+                <field name="session_ids" readonly="1"/>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_views_openacademy_courses">
+      <field name="name">Courses</field>
+      <field name="res_model">openacademy.course</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to create courses
+        </p>
+        <p>
+          Here you can enter your course course
+          details with hosting details
+        </p>
+      </field>
+    </record>
+
+    <!-- Open Academy Course Tree view -->
+    <record model="ir.ui.view" id="view_openacademy_tag_tree">
+      <field name="name">Open Academy tag</field>
+      <field name="model">openacademy.tag</field>
+      <field name="arch" type="xml">
+        <tree string="tag" editable="bottom">
+          <field name="name"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_openacademy_tag_form">
+      <field name="name">Open Academy tag Form</field>
+      <field name="model">openacademy.tag</field>
+      <field name="arch" type="xml">
+        <form string="Session" class="form">
+          <field name="name"/>
+          <field name="active"/>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_views_openacademy_tags">
+      <field name="name">tags</field>
+      <field name="res_model">openacademy.tag</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to create tags
+        </p>
+        <p>
+          Here you can enter your tag course
+          details with hosting details
+        </p>
+      </field>
+    </record>
+
+    <menuitem id="menu_openacademy_root" name="OpenAcademy"/>
+    <menuitem id="menu_openacademy_root_sessions" name="OpenAcademy Sessions" parent="menu_openacademy_root"/>
+    <menuitem id="menu_action_views_openacademy_root_sessions" name="Sessions" parent="menu_openacademy_root_sessions" action="action_views_openacademy_sessions" web_icon="static/description/icon.png"/>
+    <menuitem id="menu_action_views_openacademy_root_session_tags" name="Tags" parent="menu_openacademy_root_sessions" action="action_views_openacademy_tags"/>
+    <menuitem id="menu_openacademy_root_courses" name="OpenAcademy Courses" parent="menu_openacademy_root"/>
+    <menuitem id="menu_action_views_openacademy_root_courses" name="Courses" parent="menu_openacademy_root_courses" action="action_views_openacademy_courses"/>
+  </data>
+</openerp>

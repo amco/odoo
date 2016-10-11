@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+  <data noupdate="0">
+    <record model="ir.ui.view" id="view_ao_school_customer_form">
+      <field name="name">ao.school.customer</field>
+      <field name="model">ao.school.customer</field>
+      <field name="priority">80</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//*[@name='email']" position="after">
+          <field name="teachers"/>
+          <field name="zone_code"/>
+          <field name="payment_schema"/>
+          <field name="tax_id"/>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</openerp>
+

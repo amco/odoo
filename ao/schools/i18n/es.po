@@ -1,0 +1,212 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* schools
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-11 00:43+0000\n"
+"PO-Revision-Date: 2016-10-11 00:43+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_active
+msgid "Active"
+msgstr "Activo"
+
+#. module: schools
+#: model:ir.actions.act_window,help:schools.ao_school_action
+msgid "Add a School please..."
+msgstr "Add a School please..."
+
+#. module: schools
+#: model:ir.ui.menu,name:schools.ao_menu_school_root
+msgid "Amco School Management"
+msgstr "Amco School Management"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_census
+msgid "Census"
+msgstr "Census"
+
+#. module: schools
+#: model:ir.actions.act_window,help:schools.ao_school_action
+msgid "Click here to create a school"
+msgstr "Click here to create a school"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_code
+msgid "Code"
+msgstr "Código"
+
+#. module: schools
+#: model:ir.ui.view,arch_db:schools.ao_school_form_view
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_country
+msgid "Country"
+msgstr "País"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_contract
+msgid "Current Contract"
+msgstr "Current Contract"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: schools
+#: code:addons/schools/models/school.py:21
+#: selection:ao.school,type:0
+#, python-format
+msgid "Elementary"
+msgstr "Primaria"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_established
+msgid "Established on"
+msgstr "Established on"
+
+#. module: schools
+#: code:addons/schools/models/school.py:23
+#: selection:ao.school,type:0
+#, python-format
+msgid "High School"
+msgstr "Preparatoria"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: schools
+#: code:addons/schools/models/school.py:27
+#: selection:ao.school,state:0
+#, python-format
+msgid "Lead"
+msgstr "Lead"
+
+#. module: schools
+#: model:ir.ui.view,arch_db:schools.ao_school_form_view
+msgid "Logo"
+msgstr "Logo"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_loyalty_years
+msgid "Loyalty"
+msgstr "Lealtad"
+
+#. module: schools
+#: code:addons/schools/models/school.py:22
+#: selection:ao.school,type:0
+#, python-format
+msgid "Middle School"
+msgstr "Secundaria"
+
+#. module: schools
+#: code:addons/schools/models/school.py:30
+#: selection:ao.school,state:0
+#, python-format
+msgid "Opportunity"
+msgstr "Opportunidad"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_phone
+msgid "Phone"
+msgstr "Teléfono"
+
+#. module: schools
+#: code:addons/schools/models/school.py:20
+#: selection:ao.school,type:0
+#, python-format
+msgid "Preschool"
+msgstr "Preescolar"
+
+#. module: schools
+#: code:addons/schools/models/school.py:28
+#: selection:ao.school,state:0
+#, python-format
+msgid "Prospect"
+msgstr "Prospecto"
+
+#. module: schools
+#: code:addons/schools/models/school.py:29
+#: selection:ao.school,state:0
+#, python-format
+msgid "Qualified Prospect"
+msgstr "Prospecto Calificado"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_logo
+msgid "School Logo"
+msgstr "School Logo"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_name
+msgid "School Name"
+msgstr "Colegio"
+
+#. module: schools
+#: model:ir.actions.act_window,name:schools.ao_school_action
+#: model:ir.ui.menu,name:schools.ao_menu_school_root_school
+#: model:ir.ui.menu,name:schools.ao_menu_school_root_school_tree
+#: model:ir.ui.view,arch_db:schools.ao_school_form_view
+#: model:ir.ui.view,arch_db:schools.ao_school_tree_view
+msgid "Schools"
+msgstr "Schools"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_state
+msgid "State"
+msgstr "Provincia"
+
+#. module: schools
+#: sql_constraint:ao.school:0
+msgid "The code must be unique!"
+msgstr "¡El código tiene que ser único!"
+
+#. module: schools
+#: model:ir.model.fields,field_description:schools.field_ao_school_type
+msgid "Tipo de Colegio"
+msgstr "Tipo de Colegio"
+
+#. module: schools
+#: model:ir.model,name:schools.model_ao_school
+msgid "ao.school"
+msgstr "ao.school"
+
