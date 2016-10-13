@@ -17,7 +17,7 @@ Amco Schools Management
   "data": [
       "views/partner_view.xml",
       "views/school_view.xml",
-      "views/school_customer_view.xml",
+      "workflows/school_workflow.xml",
     ],
   "demo": [],
 }

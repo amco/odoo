@@ -25,7 +25,9 @@
       <field name="arch" type="xml">
         <form string="Schools" class="form">
           <header>
-            <field name="state" widget="statusbar" clickable="True" statusbar_visible="lead,prospect,qualified"/>
+            <button type="workflow" name="sig_qualify_school" string="Qualify!" states="lead" class="oe_highlight"/>
+            <button type="workflow" name="sig_close_school" string="Close" states="lead"/>
+            <field name="state" widget="statusbar" statusbar_visible="lead,prospect,qualified,opportunity"/>
           </header>
           <sheet>
             <group col="4">
@@ -34,14 +36,20 @@
               <field name="code"/>
               <field name="census"/>
               <field name="active"/>
+              <field name="count_students"/>
             </group>
             <group col="4">
-              <field name="customer_id"/>
               <field name="coordinator_id"/>
               <field name="country"/>
               <field name="phone"/>
               <field name="established"/>
             </group>
+
+            <template>
+              <t t-foreach="[1, 2, 3]" t-as="i">
+                <p><t t-esc="i"/></p>
+              </t>
+            </template>
 
             <notebook>
               <page string="Contract">
@@ -50,6 +58,24 @@
               <page string="Logo">
                 <field name="logo"/>
               </page>
+
+              <page string="Students">
+                <field name="student_ids">
+                  <tree string="Student" editable="bottom">
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="display_name"/>
+                    <field name="active"/>
+                  </tree>
+                  <form string="Student">
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="display_name"/>
+                    <field name="active"/>
+                  </form>
+                </field>
+              </page>
+
             </notebook>
           </sheet>
         </form>

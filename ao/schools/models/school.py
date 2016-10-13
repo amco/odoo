@@ -28,23 +28,22 @@ class AoSchool(models.Model):
   _SCHOOL_STATE = [
         ("lead", _("Lead")),
         ("prospect", _("Prospect")),
+        ("closed", "Closed"),
         ("qualified", _("Qualified Prospect")),
         ("opportunity", _("Opportunity")),
       ]
 
-  name = fields.Char(string="School Name", size=200, required=True)
+  name = fields.Char(string="School Name", size=200, required=True, states={"closed": [("readonly",True)]})
   code = fields.Char(string="Code", size=24, readonly=True, states={"lead": [("readonly", False)]})
   phone = fields.Char(string="Phone", size=11)
   country = fields.Char(string="Country", size=2, default="mx")
-  active = fields.Boolean(string="Active", default=True)
+  active = fields.Boolean(string="Active", states={"closed": [("readonly", True)]})
   type = fields.Selection(string="Tipo de Colegio", selection=_SCHOOL_TYPES, index=True)
   census = fields.Integer(string="Census", default=1)
   established = fields.Datetime(string="Established on")
 
-  coordinator_id = fields.Many2one(comodel_name="res.partner", ondelete="restrict", domain=[('function', '=', 'Coordinator')])
-  customer_id = fields.Many2one(comodel_name="ao.school.customer")
-
-  student_ids = fields.One2many(comodel_name="amco.student", string="Student")
+  coordinator_id = fields.Many2one(comodel_name="res.partner", domain=[('function', '=', 'Coordinator')])
+  student_ids = fields.One2many(comodel_name="ao.student", inverse_name="school_id", string="Student", states={"closed": [("readonly", True)]})
 
   contract = fields.Html(string="Current Contract")
   logo = fields.Binary(string="School Logo")
@@ -52,6 +51,8 @@ class AoSchool(models.Model):
   state = fields.Selection(string="State", selection=_SCHOOL_STATE, default="lead")
 
   loyalty_years=fields.Integer(compute="_get_loyalty_years", string="Loyalty")
+
+  count_students = fields.Integer(compute="_get_count_students", string="Total Students")
 
   _sql_constraints = [
         ("school_code_unique", "unique (code)", "The code must be unique!"),
@@ -78,3 +79,22 @@ class AoSchool(models.Model):
       if record.established:
         established = datetime.strptime(record.established, DEFAULT_SERVER_DATETIME_FORMAT)
         record.loyalty_years = relativedelta(datetime.now(), established).years
+
+  @api.multi
+  @api.depends("student_ids")
+  def _get_count_students(self):
+    for record in self:
+      record.count_students = sum([att.count for att in record.student_ids])
+
+  @api.multi
+  def action_qualify(self):
+    for record in self:
+      if record.count_students > 10:
+        record.state = True
+        record.state = "prospect"
+
+  @api.multi
+  def action_close(self):
+    for record in self:
+      record.state = "closed"
+      record.active = False

@@ -9,6 +9,7 @@ class Partner(models.Model):
       ("admin", "Administrator"),
       ("supervisor", "Supervisor"),
       ("teacher", "Teacher"),
+      ("student", "Student"),
     ]
 
   roles = fields.Selection(string="Role", selection=_ROLES)

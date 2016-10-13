@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<openerp>
+  <data noupdate="0">
+    <record id="ao_wkfschool" model="workflow">
+      <field name="name">ao.school.workflow</field>
+      <field name="osv">ao.school</field>
+      <field name="on_create">True</field>
+    </record>
+
+    <record id="act_lead" model="workflow.activity">
+      <field name="wkf_id" ref="ao_wkfschool"/>
+      <field name="name">Lead</field>
+      <field name="flow_start">True</field>
+    </record>
+
+    <record id="act_qualify" model="workflow.activity">
+      <field name="wkf_id" ref="ao_wkfschool"/>
+      <field name="name">Qualify</field>
+      <field name="kind">function</field>
+      <field name="action">action_qualify()</field>
+    </record>
+
+    <record id="trans_qualify_school" model="workflow.transition">
+      <field name="act_from" ref="act_lead"/>
+      <field name="act_to" ref="act_qualify"/>
+      <field name="signal">sig_qualify_school</field>
+      <field name="condition">True</field>
+    </record>
+
+    <record id="act_close" model="workflow.activity">
+      <field name="wkf_id" ref="ao_wkfschool"/>
+      <field name="name">Close</field>
+      <field name="kind">function</field>
+      <field name="action">action_close()</field>
+    </record>
+
+    <record id="trans_close_school" model="workflow.transition">
+      <field name="act_from" ref="act_lead"/>
+      <field name="act_to" ref="act_close"/>
+      <field name="signal">sig_close_school</field>
+      <field name="condition">True</field>
+    </record>
+
+    <record id="act_lead" model="workflow.activity">
+      <field name="wkf_id" ref="ao_wkfschool"/>
+      <field name="name">Oportunity</field>
+      <field name="flow_stop">True</field>
+    </record>
+  </data>
+</openerp>

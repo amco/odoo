@@ -10,6 +10,7 @@
         <data>
           <xpath expr="//*[@name='function']" position="before">
             <field name="roles"/>
+            <button type="action" name="%(ao_school_action)d" string="Create School" class="oe_link" />
           </xpath>
         </data>
       </field>
