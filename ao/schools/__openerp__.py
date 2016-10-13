@@ -15,6 +15,8 @@ Amco Schools Management
   "depends": ["base"],
   "category": "Tools",
   "data": [
+      "security/school_security.xml",
+      "security/ir.model.access.csv",
       "views/partner_view.xml",
       "views/school_view.xml",
       "workflows/school_workflow.xml",

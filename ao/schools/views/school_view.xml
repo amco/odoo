@@ -9,11 +9,12 @@
         <tree string="Schools" editable="bottom" decoration-danger="census&gt;600" decoration-info="census==500">
           <field name="name"/>
           <field name="country"/>
+          <field name="responsible_id"/>
           <field name="phone"/>
+          <field name="census"/>
           <field name="loyalty_years"/>
           <field name="type"/>
           <field name="code"/>
-          <field name="census"/>
           <field name="active"/>
           <field name="state"/>
         </tree>

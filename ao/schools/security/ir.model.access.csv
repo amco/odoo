@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ao_school,access_ao_school,model_ao_school,group_ao_user,1,0,0,0
+access_ao_school,access_ao_school,model_ao_school,group_ao_admin,1,1,1,1
+access_ao_student,access_ao_student,model_ao_student,,1,0,0,0

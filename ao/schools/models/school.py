@@ -45,6 +45,8 @@ class AoSchool(models.Model):
   coordinator_id = fields.Many2one(comodel_name="res.partner", domain=[('function', '=', 'Coordinator')])
   student_ids = fields.One2many(comodel_name="ao.student", inverse_name="school_id", string="Student", states={"closed": [("readonly", True)]})
 
+  responsible_id = fields.Many2one(comodel_name="res.users")
+
   contract = fields.Html(string="Current Contract")
   logo = fields.Binary(string="School Logo")
 
